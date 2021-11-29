@@ -37,6 +37,8 @@ var createNewTaskElement=function(taskString){
 
     //Each elements, needs appending
     checkBox.type="checkbox";
+    checkBox.classList.add('task-check');
+
     editInput.type="text";
     editInput.className="task-input";
 
@@ -45,8 +47,10 @@ var createNewTaskElement=function(taskString){
 
     deleteButton.className="btn-delete";
     deleteButtonImg.src='./remove.svg';
+    deleteButtonImg.classList.add('btn-delete-img');
     deleteButton.appendChild(deleteButtonImg);
 
+    listItem.classList.add('list-item');
 
     //and appending.
     listItem.appendChild(checkBox);
@@ -82,8 +86,8 @@ var editTask=function(){
 
     var listItem=this.parentNode;
 
-    var editInput=listItem.querySelector('input[type=text]');
-    var label=listItem.querySelector("label");
+    var editInput=listItem.querySelector('.task-input');
+    var label=listItem.querySelector(".task-label");
     var editBtn=listItem.querySelector(".btn-edit");
     var containsClass=listItem.classList.contains("edit-mode");
     //If class of the parent is .edit-mode
@@ -148,16 +152,16 @@ var ajaxRequest=function(){
 
 //Set the click handler to the addTask function.
 addButton.onclick=addTask;
-addButton.addEventListener("click",addTask);
-addButton.addEventListener("click",ajaxRequest);
+addButton.addEventListener("click", addTask);
+addButton.addEventListener("click", ajaxRequest);
 
 
 var bindTaskEvents=function(taskListItem,checkBoxEventHandler){
     console.log("bind list item events");
 //select ListItems children
-    var checkBox=taskListItem.querySelector("input[type=checkbox]");
-    var editButton=taskListItem.querySelector("button.btn-edit");
-    var deleteButton=taskListItem.querySelector("button.btn-delete");
+    var checkBox=taskListItem.querySelector(".task-check");
+    var editButton=taskListItem.querySelector(".btn-edit");
+    var deleteButton=taskListItem.querySelector(".btn-delete");
 
 
     //Bind editTask to edit button.
@@ -170,7 +174,7 @@ var bindTaskEvents=function(taskListItem,checkBoxEventHandler){
 
 //cycle over incompleteTaskHolder ul list items
 //for each list item
-for (var i=0; i<incompleteTaskHolder.children.length;i++){
+for (var i=0; i<incompleteTaskHolder.children.length; i++){
 
     //bind events to list items chldren(tasksCompleted)
     bindTaskEvents(incompleteTaskHolder.children[i],taskCompleted);
